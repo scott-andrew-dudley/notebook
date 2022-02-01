@@ -1,0 +1,32 @@
+<form [formGroup]="noteForm" #formDirective="ngForm" (ngSubmit)="submitForm($event)">  
+  <!-- Title -->
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input type="text" formControlName="title" matInput />
+
+    <!-- Error -->
+    <mat-error *ngIf="isSubmit && f.title.errors">
+      <ng-container *ngIf="f.title.errors.required">
+        <i class="material-icons">error_outline</i>
+        <span>Title is required.</span>
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Body -->
+  <mat-form-field class="mat-form-field--textarea">
+    <mat-label>Body</mat-label>
+    <textarea formControlName="body" matInput></textarea>
+
+    <!-- Error -->
+    <mat-error *ngIf="isSubmit && f.body.errors">
+      <ng-container *ngIf="f.body.errors.required">
+        <i class="material-icons">error_outline</i>
+        <span>Body is required.</span>
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Submit -->
+  <button class="button" type="submit">Save</button>
+</form>

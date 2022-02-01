@@ -1,0 +1,39 @@
+<ul class="notes__contain">
+  <!-- New Note -->
+  <ng-template #newNote>
+    <li class="notes__listitem notes__listitem--active">
+      <!-- Title -->
+      <div class="notes__note-title">
+        <div class="notes__overflow">Composing&hellip;</div>
+      </div>
+
+      <!-- Date -->
+      <div class="notes__note-date">
+        <div class="notes__overflow">[ Show last autosave ]</div>
+      </div>
+
+      <!-- Body -->
+      <div class="notes__note-body">&hellip;</div>
+    </li>
+  </ng-template>
+
+  <!-- List -->
+  <ng-container *ngIf="notes.length > 0; else newNote">
+    <li class="notes__listitem" *ngFor="let n of notes">
+      <button class="notes__button" (click)="createNoteEvent()">
+        <!-- Title -->
+        <div class="notes__note-title">
+          <div class="notes__overflow">{{ n }}</div>
+        </div>
+
+        <!-- Date -->
+        <div class="notes__note-date">
+          <div class="notes__overflow">[ 9/19/1984 ]</div>
+        </div>
+
+        <!-- Body -->
+        <div class="notes__note-body">[ S A M P L E T E X T ]</div>
+      </button>
+    </li>
+  </ng-container>
+</ul>
