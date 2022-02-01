@@ -1,6 +1,6 @@
 <form [formGroup]="noteForm" #formDirective="ngForm" (ngSubmit)="submitForm($event)">  
   <!-- Title -->
-  <mat-form-field>
+  <mat-form-field [class.mat-form-field--error]="isSubmit && f.title.errors">
     <mat-label>Title</mat-label>
     <input type="text" formControlName="title" matInput />
 
@@ -14,7 +14,10 @@
   </mat-form-field>
 
   <!-- Body -->
-  <mat-form-field class="mat-form-field--textarea">
+  <mat-form-field
+    class="mat-form-field--textarea"
+    [class.mat-form-field--error]="isSubmit && f.body.errors"
+  >
     <mat-label>Body</mat-label>
     <textarea formControlName="body" matInput></textarea>
 
