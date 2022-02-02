@@ -1,8 +1,26 @@
-<form [formGroup]="noteForm" #formDirective="ngForm" (ngSubmit)="submitForm($event)">  
+<!-- Heading -->
+<div class="form__header">
+  <h2 class="form__heading">
+    {{ isCreate ? 'New Note' : 'Edit Note: ' + currNote?.title }}
+  </h2>
+</div>
+
+<!-- Form -->
+<form
+  [formGroup]="noteForm"
+  #form="ngForm"
+  autocomplete="off"
+  (ngSubmit)="submitForm($event)"
+>
   <!-- Title -->
   <mat-form-field [class.mat-form-field--error]="isSubmit && f.title.errors">
     <mat-label>Title</mat-label>
-    <input type="text" formControlName="title" matInput />
+    <input
+      type="text"
+      formControlName="title"
+      [disabled]="isSubmit"
+      matInput
+    />
 
     <!-- Error -->
     <mat-error *ngIf="isSubmit && f.title.errors">
@@ -19,7 +37,11 @@
     [class.mat-form-field--error]="isSubmit && f.body.errors"
   >
     <mat-label>Body</mat-label>
-    <textarea formControlName="body" matInput></textarea>
+    <textarea
+      formControlName="body"
+      [disabled]="isSubmit"
+      matInput
+    ></textarea>
 
     <!-- Error -->
     <mat-error *ngIf="isSubmit && f.body.errors">
@@ -30,6 +52,20 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- Submit -->
-  <button class="button" type="submit">Save</button>
+  <!-- Actions -->
+  <div class="form__actions">
+    <!-- Delete -->
+    <ng-container *ngIf="!isCreate">
+      <button
+        class="button button--secondary"
+        (click)="deleteNote()"
+      >Delete</button>
+    </ng-container>
+
+    <!-- Save -->
+    <button
+      class="button form__action-button"
+      type="submit"
+    >Save</button>
+  </div>
 </form>

@@ -82,12 +82,8 @@ button {
 }
 
 :focus {
-  outline: 0;
-
-  &.focus-visible {
-    outline: 4px solid rgba(#07c, 0.6);
-    outline-offset: 1px;
-  }
+  outline: 4px solid rgb(0 125 250 / 60%);
+  outline-offset: 1px;
 }
 
 ::-moz-focus-inner {
@@ -128,6 +124,7 @@ table {
   width: 100%;
 }
 
+// Mat Form Fields
 .mat-form-field {
   display: block !important;
   margin-bottom: 14px;
@@ -153,10 +150,6 @@ table {
 }
 
 .mat-form-field--textarea .mat-form-field-flex {
-  height: 96px;
-}
-
-.mat-form-field--textarea.mat-form-field--tall .mat-form-field-flex {
   height: 144px;
 }
 
@@ -166,6 +159,7 @@ table {
 
 .mat-form-field.mat-form-field--textarea .mat-input-element {
   padding-top: 0;
+  resize: none;
 }
 
 .mat-error {
@@ -259,15 +253,65 @@ table {
   display: none !important;
 }
 
+// Snackbar
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 1000;
+}
+
+.cdk-overlay-container,
+.cdk-global-overlay-wrapper {
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.cdk-global-overlay-wrapper {
+  display: flex;
+  align-items: flex-start !important;
+  justify-content: start !important;
+  position: absolute;
+  z-index: 1000;
+}
+
+.cdk-overlay-page {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000;
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.mat-snack-bar-container {
+  color: #ffffffb3;
+  background: #323232;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: block;
+  margin: 24px;
+  max-width: 33vw;
+  min-width: 344px;
+  padding: 14px 16px;
+  min-height: 48px;
+  transform-origin: center;
+}
+
+// Shared
 .button {
   background-color: #0071e3;
-  border-radius: 999px;
+  border-radius: 8px;
   color: #fff;
   cursor: pointer;
   display: inline-block;
   font-size: 17px;
   font-weight: 500;
   line-height: 20px;
+  min-width: 148px;
   padding: 12px 22px;
   text-align: center;
 
@@ -277,6 +321,33 @@ table {
 
   &:active {
     background-color: #006edb;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 4px rgba(0 125 250 / 60%);
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.56;
+    pointer-events: none;
+  }
+}
+
+.button + .button {
+  margin-left: 12px;
+}
+
+.button--secondary {
+  background-color: #e8e8ed;
+  color: #000;
+
+  &:hover {
+    background-color: #ebebf0
+  }
+
+  &:active {
+    background-color: #e6e6eb;
   }
 }
 
@@ -332,14 +403,17 @@ table {
 // Notes
 .notes {
   flex: 0 0 290px;
-  position: sticky;
-  top: 0;
+  max-width: 290px;
 }
 
 .notes__contain {
   display: block;
   padding: 0 15px 20px;
   width: 100%;
+}
+
+.notes__compose {
+  padding: 0 30px 30px;
 }
 
 .notes__listitem {
@@ -349,9 +423,21 @@ table {
   flex-direction: column;
   margin-bottom: 10px;
   min-height: 32px;
+  max-height: 76px;
   overflow: hidden;
-  padding: 10px 15px;
   width: 100%;
+
+  &:hover {
+    background-color: #ebebeb;
+  }
+
+  & button {
+    display: block;
+    height: 100%;
+    padding: 10px 15px;
+    text-align: left;
+    width: 100%;
+  }
 }
 
 .notes__listitem--active {
@@ -378,13 +464,15 @@ table {
 }
 
 .notes__note-date,
-.notes__note-body {
+.notes__note-body,
+.notes__empty {
   font-size: 15px;
   font-weight: 400;
   line-height: 20px;
 }
 
-.notes__note-body {
+.notes__note-body,
+.notes__empty {
   color: #9f9f9f;
 }
 
@@ -394,18 +482,54 @@ table {
   text-overflow: ellipsis;
 }
 
+.notes__empty {
+  padding: 0 15px 30px;
+}
+
 // Form
 .form {
   flex: 1 1 auto;
   padding-left: 90px;
 }
 
+.form__header {
+  padding: 0 0 30px;
+}
+
+.form__heading {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 32px;
+
+  @media only screen and (min-width: 1069px) {
+    font-size: 32px;
+    line-height: 36px;
+  }
+}
+
+.form__actions {
+  border-top: 1px solid #d2d2d7;
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0 0 0;
+  padding: 20px 0;
+
+  @media only screen and (min-width: 1069px) {
+    margin: 90px 0 0 0;
+  }
+}
+
+.form__action-button {
+  margin-left: auto;
+}
+
 // Footer
 .footer {
-  background-color: #161617;
+  background-color: #f5f5f7;
   display: block;
   flex: 0 0 auto;
   padding: 30px;
+  text-align: center;
   width: 100%;
 }
 

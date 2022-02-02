@@ -6,6 +6,7 @@ import { NotepadComponent } from './notepad/notepad.component';
 
 const routes: Routes = [
   { path: '', component: NotepadComponent },
+  { path: 'home', component: NotepadComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'page-not-found', component: ErrorComponent },
   { path: '**', redirectTo: '/page-not-found' },
