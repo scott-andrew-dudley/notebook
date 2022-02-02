@@ -5,14 +5,21 @@
 <div class="body">
   <div class="body__contain">
     <!-- Notes -->
-    <app-notes [notes]="notes"></app-notes>
-    <!-- <app-notes
+    <app-notes
       [notes]="notes"
+      [currNote]="currNote"
+      [isCreate]="isCreate"
       (sendCreateNoteEvent)="getCreateNoteEvent($event)"
-    ></app-notes> -->
+      (sendCreateNewNoteEvent)="getCreateNewNoteEvent()"
+    ></app-notes>
 
     <!-- Form -->
-    <app-form [isCreate]="isCreate"></app-form>
+    <app-form
+      [currNote]="currNote"
+      [isCreate]="isCreate"
+      (sendFormEvent)="getFormEvent($event)"
+      (sendDeleteEvent)="getDeleteEvent($event)"
+    ></app-form>
   </div>
 </div>
 

@@ -1,23 +1,29 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { EventEmitter } from 'protractor';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+import { FormData } from '../form-data.model';
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss'],
   host: { class: 'notes' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotesComponent {
-  @Input()
-  notes!: object[];
+  @Input() notes!: FormData[] | null;
 
-  // @Output()
-  // sendCreateNoteEvent = new EventEmitter();
+  @Input() currNote!: FormData | null;
 
-  // FIXME
-  createNoteEvent(): void {
-    console.log('create note event...');
-    // this.sendCreateNoteEvent.emit(event);
+  @Input() isCreate!: boolean;
+
+  @Output() sendCreateNoteEvent: EventEmitter<FormData> = new EventEmitter();
+
+  @Output() sendCreateNewNoteEvent: EventEmitter<null> = new EventEmitter();
+
+  createNoteEvent(note: FormData): void {
+    this.sendCreateNoteEvent.emit(note);
+  }
+
+  createNewNoteEvent(): void {
+    this.sendCreateNewNoteEvent.emit();
   }
 }
