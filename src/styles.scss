@@ -271,7 +271,7 @@ table {
 .cdk-global-overlay-wrapper {
   display: flex;
   align-items: flex-start !important;
-  justify-content: start !important;
+  justify-content: flex-start !important;
   position: absolute;
   z-index: 1000;
 }
